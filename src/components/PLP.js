@@ -8,8 +8,7 @@ class PLP extends Component {
     super(props);
     this.state = {products: []};
     this.client = client
-   
-  }
+    }
 
   // const { error, loading, data } = useQuery(LOAD_USERS);
   getAllProducts = () => {
@@ -33,6 +32,7 @@ class PLP extends Component {
 
   
   
+  
 
   render() {
     return (
@@ -42,9 +42,14 @@ class PLP extends Component {
         : this.state.products.map((product, i) => (
           <div key={i} >{product.name}</div>
         ))}
+        <button onClick={() => console.log(this.props)} >prpos</button>
       </div>
-    );
+    ); 
   }
+}
+
+PLP.defaultProps = {
+  text: 'Meh'
 }
 
 export default PLP;
