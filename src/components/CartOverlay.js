@@ -1,11 +1,10 @@
 import React, { Component } from "react";
+import cartOutline from "./icons/cart-outline.svg";
 
 class CartOverlay extends Component {
   render() {
     return (
-      <div className="App">
-        <h1>CartOverlay</h1>
-      </div>
+      <img src={cartOutline} />
     );
   }
 }

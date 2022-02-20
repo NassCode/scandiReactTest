@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { client } from "../index";
 import { CATEGORIES } from "../GraphQL/Queries";
-
+import Item from "./Item";
 
 class PLP extends Component {
   constructor(props) {
@@ -10,16 +10,13 @@ class PLP extends Component {
     this.client = client
     }
 
-  // const { error, loading, data } = useQuery(LOAD_USERS);
   getAllProducts = () => {
     this.client
       .query({
         query: CATEGORIES
       })
       .then((res) => {
-        console.log(res);
         this.setState({products: res.data.categories[0].products});
-        console.log(`${this.state.products[0].name} + from getAllProducts`);
       })
       .catch((err) => console.log(err));
   };
@@ -27,7 +24,6 @@ class PLP extends Component {
 
   componentDidMount() {
     this.getAllProducts();
-    console.log(`${this.state.products} + from did mount`);
   }
 
   
@@ -36,13 +32,11 @@ class PLP extends Component {
 
   render() {
     return (
-      <div className="App">
-        {this.state.products === [] 
-        ? null
-        : this.state.products.map((product, i) => (
-          <div key={i} >{product.name}</div>
+      <div className="PLPcontainer">
+        
+        {this.state.products.map((product, i) => (
+          <Item key={product.id} productProps={product} />
         ))}
-        <button onClick={() => console.log(this.props)} >prpos</button>
       </div>
     ); 
   }
