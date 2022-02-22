@@ -6,7 +6,7 @@ import Item from "./Item";
 class PLP extends Component {
   constructor(props) {
     super(props);
-    this.state = {products: []};
+    this.state = {products: [], currentPage: "all"};
     this.client = client
     }
 
