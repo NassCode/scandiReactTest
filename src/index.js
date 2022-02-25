@@ -8,6 +8,8 @@ import {
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client";
+import { Provider } from "react-redux";
+import store from "./Redux/store";
 
 
 export const client = new ApolloClient({
@@ -17,7 +19,9 @@ export const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-    <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')

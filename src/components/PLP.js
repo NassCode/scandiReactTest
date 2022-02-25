@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { client } from "../index";
 import { CATEGORIES } from "../GraphQL/Queries";
 import Item from "./Item";
+import App from  "../count"
 
 class PLP extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class PLP extends Component {
   render() {
     return (
       <div className="PLPcontainer">
+        <App />
         
         {this.state.products.map((product, i) => (
           <Item key={product.id} productProps={product} />
