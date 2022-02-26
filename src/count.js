@@ -5,19 +5,36 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   
-  return { counter: state.counter };
+  return { count: state.counter[0].count };
 }
 
-export class App extends Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // dispatching plain actions
+    increment: () => dispatch({ type: 'INCREMENT' }),
+    decrement: () => dispatch({ type: 'DECREMENT' }),
   }
+}
+
+class App extends Component {
+  increment = () => {
+    this.props.increment();
+  }
+  decrement = () => {
+    this.props.decrement();
+  }
+  
   
   render() {
     return (
       <div className="PLPitem">
-        <h1>{this.props.counter.count}</h1>
+        <button onClick={this.increment}>
+          +
+        </button>
+        <h1>{this.props.count}</h1>
+        <button onClick={this.decrement}>
+          -
+        </button>
     </div>
     )
   }
@@ -26,4 +43,4 @@ export class App extends Component {
 }
 
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
