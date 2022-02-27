@@ -2,14 +2,17 @@ import React, { Component } from "react";
 import { client } from "../index";
 import { CATEGORIES } from "../GraphQL/Queries";
 import Item from "./Item";
-import App from  "../count"
+import { connect } from "react-redux";
 
 class PLP extends Component {
   constructor(props) {
     super(props);
-    this.state = {products: [], currentPage: "all"};
     this.client = client
     }
+
+  fetchProducts = (e) => {
+    this.props.fetchProducts(e)
+  }
 
   getAllProducts = () => {
     this.client
@@ -17,7 +20,9 @@ class PLP extends Component {
         query: CATEGORIES
       })
       .then((res) => {
-        this.setState({products: res.data.categories[0].products});
+        console.log(res.data.categories[0].products)
+        this.fetchProducts(res.data.categories[0].products);
+
       })
       .catch((err) => console.log(err));
   };
@@ -25,20 +30,17 @@ class PLP extends Component {
 
   componentDidMount() {
     this.getAllProducts();
+    console.log(this.props.allProducts)
   }
-
-  
-  
-  
 
   render() {
     return (
       <div className="PLPcontainer">
-        <App />
         
-        {this.state.products.map((product, i) => (
+        {this.props.allProducts.map((product, i) => (
           <Item key={product.id} productProps={product} />
         ))}
+
       </div>
     ); 
   }
@@ -48,4 +50,17 @@ PLP.defaultProps = {
   text: 'Meh'
 }
 
-export default PLP;
+const mapStateToProps = (state) => {
+  return {
+    allProducts: state.allProducts
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProducts: (e) => dispatch({type: "FETCH_PRODUCTS", payload: e})
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PLP);
