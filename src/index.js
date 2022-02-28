@@ -9,22 +9,25 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import { Provider } from "react-redux";
-import  rootReducer from "./reducers/rootReducer";
+import rootReducer from "./reducers/rootReducer";
 import { createStore } from "redux";
 
 const store = createStore(rootReducer);
 
 export const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: 'http://localhost:4000/'});
+  uri: 'http://localhost:4000/'
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <ApolloProvider client={client}>
+
         <App />
-      </Provider>
-    </ApolloProvider>
+
+      </ApolloProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

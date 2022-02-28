@@ -5,10 +5,10 @@ import Item from "./Item";
 import { connect } from "react-redux";
 
 class PLP extends Component {
-  constructor(props) {
-    super(props);
-    this.client = client
-    }
+ 
+  
+    client = client;
+    
 
   fetchProducts = (e) => {
     this.props.fetchProducts(e)
@@ -20,9 +20,13 @@ class PLP extends Component {
         query: CATEGORIES
       })
       .then((res) => {
-        console.log(res.data.categories[0].products)
-        this.fetchProducts(res.data.categories[0].products);
+        // console.log(res.data.categories[0].products)
+        // console.log('response',res.data.categories)
 
+        this.fetchProducts(res.data.categories);
+        console.log(this.props.allProducts)
+
+       
       })
       .catch((err) => console.log(err));
   };
@@ -30,16 +34,21 @@ class PLP extends Component {
 
   componentDidMount() {
     this.getAllProducts();
-    console.log(this.props.allProducts)
   }
 
   render() {
     return (
       <div className="PLPcontainer">
         
-        {this.props.allProducts.map((product, i) => (
+        {/* {this.props.allProducts.map((product, i) => (
           <Item key={product.id} productProps={product} />
-        ))}
+        ))}  */}
+
+        {/* {this.props.allProducts.map((product, i) => (
+          <p key={product.id}>
+            {product.name}
+          </p>
+        ))} */}
 
       </div>
     ); 
@@ -52,7 +61,7 @@ PLP.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    allProducts: state.allProducts
+    allProducts: state.categories[0]
   }
 }
 

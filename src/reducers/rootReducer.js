@@ -1,5 +1,5 @@
 const initialState = {
-  allProducts: [],
+  categories: [],
 }
 
 const rootReducer = ( state = initialState, action ) => {
@@ -10,7 +10,7 @@ const rootReducer = ( state = initialState, action ) => {
         console.log(state)
         return {
           ...state,
-          allProducts: action.payload,
+          categories: action.payload,
 
         }
     
