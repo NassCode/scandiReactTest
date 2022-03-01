@@ -5,10 +5,10 @@ import Item from "./Item";
 import { connect } from "react-redux";
 
 class PLP extends Component {
- 
-  
-    client = client;
-    
+
+
+  client = client;
+
 
   fetchProducts = (e) => {
     this.props.fetchProducts(e)
@@ -20,17 +20,11 @@ class PLP extends Component {
         query: CATEGORIES
       })
       .then((res) => {
-        // console.log(res.data.categories[0].products)
-        // console.log('response',res.data.categories)
-
         this.fetchProducts(res.data.categories);
-        console.log(this.props.allProducts)
-
-       
       })
       .catch((err) => console.log(err));
   };
-  
+
 
   componentDidMount() {
     this.getAllProducts();
@@ -39,24 +33,85 @@ class PLP extends Component {
   render() {
     return (
       <div className="PLPcontainer">
-        
-        {/* {this.props.allProducts.map((product, i) => (
-          <Item key={product.id} productProps={product} />
-        ))}  */}
 
-        {/* {this.props.allProducts.map((product, i) => (
-          <p key={product.id}>
-            {product.name}
-          </p>
-        ))} */}
+        {this.props.allProducts.products.map((product, i) => (
+          <Item key={product.id} productProps={product} />
+        ))}
 
       </div>
-    ); 
+    );
   }
 }
 
 PLP.defaultProps = {
-  text: 'Meh'
+  allProducts: {
+    products: [{
+      id: 1,
+      name: "placeholder",
+      prices: [
+        {
+          amount: 1,
+          currency: {
+            label: "USD",
+            symbol: "$"
+          }
+        },
+        {
+          amount: 1,
+          currency: {
+            label: "GBP",
+            symbol: "£"
+          }
+        },
+        {
+          amount: 1,
+          currency: {
+            label: "AUD",
+            symbol: "A$"
+          }
+        },
+        {
+          amount: 1,
+          currency: {
+            label: "JPY",
+            symbol: "¥"
+          }
+        },
+        {
+          amount: 1,
+          currency: {
+            label: "RUB",
+            symbol: "₽"
+          }
+        }
+      ],
+      inStock: true,
+      gallery: [
+        ""
+      ],
+      attributes: [
+        {
+          name: "Size",
+          items: [
+            {
+              displayValue: "1",
+              value: "1"
+            },
+            {
+              displayValue: "1",
+              value: "1"
+            },
+            {
+              displayValue: "1",
+              value: "1"
+            },
+            {
+              displayValue: "1",
+              value: "1"
+            }]
+        }]
+    }]
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -67,7 +122,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProducts: (e) => dispatch({type: "FETCH_PRODUCTS", payload: e})
+    fetchProducts: (e) => dispatch({ type: "FETCH_PRODUCTS", payload: e })
   }
 }
 
