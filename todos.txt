@@ -1,0 +1,49 @@
+# reformat reducers and actions
+# react router
+
+
+PLP
+  view a product
+    go to PDP.product
+
+  add item to cart 
+  inStock css representation
+    disable add, enable view product
+
+  appearance of add icon on a product box
+
+  add product from PLP
+    quick add component
+      attributes representation
+      access cart state for referance
+      product is already added ? increment
+      reducer
+
+
+cart
+  cart state
+  connect cart component
+  represent attributes
+  reducer
+
+
+PDP
+  PDP component
+
+
+
+navbar 
+  items added to cart indicator
+    cart state is empty  && no indicator
+    indicator represents count of added products
+
+  cartoverLay component
+    cart state
+    connect cartoverLay component
+    add/remove products from cartoverLay component
+    increment/decrement products 
+    reducer
+
+  current page navbar indicator
+    createContext / update context and reflect changes
+
