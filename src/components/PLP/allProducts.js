@@ -1,13 +1,20 @@
 import React, { Component } from "react";
-import { client } from "../index";
-import { CATEGORIES } from "../GraphQL/Queries";
-import Item from "./Item";
+import { client } from "../../index";
+import { CATEGORIES } from "../../GraphQL/Queries";
+import Item from "../Item";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom'
+import Navbar from "../navbar";
+import { Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
+import Tech from "./tech";
 
-class PLP extends Component {
+class AllProducts extends Component {
 
 
   client = client;
+  path = this.props.match.path;
+  url = this.props.match.url;
 
 
   fetchProducts = (e) => {
@@ -31,19 +38,29 @@ class PLP extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className="PLPcontainer">
+        <Navbar />
 
-        {this.props.allProducts.products.map((product, i) => (
-          <Item key={product.id} productProps={product} />
-        ))}
+        <Switch>
+          <Route exact path='/'>
+
+            {this.props.allProducts.products.map((product, i) => (
+              <Item key={product.id} productProps={product} />
+            ))}
+
+          </Route>
+
+        </Switch>
+
 
       </div>
     );
   }
 }
 
-PLP.defaultProps = {
+AllProducts.defaultProps = {
   allProducts: {
     products: [{
       id: 1,
@@ -116,7 +133,9 @@ PLP.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    allProducts: state.categories[0]
+    allProducts: state.categories[0],
+    colthes: state.categories[1],
+    tech: state.categories[2]
   }
 }
 
@@ -127,4 +146,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(PLP);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AllProducts));
