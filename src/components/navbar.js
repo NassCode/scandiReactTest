@@ -7,23 +7,21 @@ import { withRouter } from "react-router-dom";
 
 
 class Navbar extends Component {
-  path = this.props.match.path;
-  url = this.props.match.url;
 
 
 
   render() {
+    console.log(this.props)
 
     return (
       <div className="navbar container">
         <div className="categoriesContainer">
 
-          <NavLink to='/'>All</NavLink>
+          <span onClick={() => this.props.handleTabClick('all')}>All</span>
 
+          <span onClick={() => this.props.handleTabClick('clothes')}>Clothes</span>
 
-          <NavLink to='/clothes'>Clothes</NavLink>
-
-          <NavLink to='/tech'>Tech</NavLink>
+          <span onClick={() => this.props.handleTabClick('tech')}>Tech</span>
 
         </div>
 
@@ -43,4 +41,4 @@ Navbar.defaultProps = {
   text: 'Navbar'
 }
 
-export default withRouter(Navbar);
+export default Navbar;

@@ -10,6 +10,19 @@ import { Route } from "react-router-dom";
 import Tech from "./tech";
 
 class AllProducts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tab: "all"
+    };
+    this.handleTabClick = this.handleTabClick.bind(this);
+
+  }
+
+  handleTabClick = (e) => {
+    this.setState({ tab: e });
+    console.log(this.state.tab);
+  };
 
 
   client = client;
@@ -40,21 +53,34 @@ class AllProducts extends Component {
   render() {
     console.log(this.props)
     return (
-      <div className="PLPcontainer">
-        <Navbar />
+      <div>
+        <Navbar handleTabClick={this.handleTabClick} />
 
-        <Switch>
-          <Route exact path='/'>
+        <div className="PLPcontainer">
+          {this.state.tab === "all" &&
 
-            {this.props.allProducts.products.map((product, i) => (
+            this.props.allProducts.products.map((product, i) => (
               <Item key={product.id} productProps={product} />
-            ))}
+            ))
+          }
 
-          </Route>
+          {this.state.tab === "clothes" &&
 
-        </Switch>
+            this.props.colthes.products.map((product, i) => (
+              <Item key={product.id} productProps={product} />
+            ))
 
+          }
 
+          {this.state.tab === "tech" &&
+
+            this.props.tech.products.map((product, i) => (
+              <Item key={product.id} productProps={product} />
+            ))
+
+          }
+
+        </div>
       </div>
     );
   }
