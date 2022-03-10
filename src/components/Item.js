@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import cartOutline from "./icons/cart-outline.svg";
+import { withRouter } from 'react-router-dom'
+
+
 
 class Item extends Component {
 
+  history = this.props.history;
 
 
   render() {
     return (
-      <div onClick={() => console.log('item clicked')} className="PLPitem">
+      <div onClick={() => this.history.push(`/item/${this.props.productProps.id}`)} className="PLPitem">
         <div className="PLPimageContainer">
           <img className="PLPimage" src={this.props.productProps.gallery[0]} alt={cartOutline} />
         </div>
@@ -20,4 +24,4 @@ class Item extends Component {
   }
 }
 
-export default Item;
+export default withRouter(Item);

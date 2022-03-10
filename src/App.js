@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import React, { Component } from 'react';
 import PLP from './components/PLP';
+import PDP from './components/PDP';
 import CartPage from './components/CartPage';
 import CartOverlay from './components/CartOverlay';
 import Navbar from './components/navbar';
@@ -30,6 +31,9 @@ class App extends Component {
               </Route>
               <Route path='/tech'>
                 <PLP type='tech' />
+              </Route>
+              <Route path='/item/:id'>
+                <PDP />
               </Route>
               <Route path='/cart'>
                 <CartPage />
