@@ -1,28 +1,14 @@
 import React, { Component } from "react";
-import { client } from "../../index";
-import { CATEGORIES } from "../../GraphQL/Queries";
-import Item from "../Item";
+import { client } from "../index";
+import { CATEGORIES } from "../GraphQL/Queries";
+import Item from "./Item";
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom'
-import Navbar from "../navbar";
+import Navbar from "./navbar";
 import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
-import Tech from "./tech";
 
-class AllProducts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tab: "all"
-    };
-    this.handleTabClick = this.handleTabClick.bind(this);
-
-  }
-
-  handleTabClick = (e) => {
-    this.setState({ tab: e });
-    console.log(this.state.tab);
-  };
+class PLP extends Component {
 
 
   client = client;
@@ -54,17 +40,17 @@ class AllProducts extends Component {
     console.log(this.props)
     return (
       <div>
-        <Navbar handleTabClick={this.handleTabClick} />
+        {/* <Navbar handleTabClick={this.handleTabClick} /> */}
 
         <div className="PLPcontainer">
-          {this.state.tab === "all" &&
+          {this.props.type === "all" &&
 
             this.props.allProducts.products.map((product, i) => (
               <Item key={product.id} productProps={product} />
             ))
           }
 
-          {this.state.tab === "clothes" &&
+          {this.props.type === "clothes" &&
 
             this.props.colthes.products.map((product, i) => (
               <Item key={product.id} productProps={product} />
@@ -72,7 +58,7 @@ class AllProducts extends Component {
 
           }
 
-          {this.state.tab === "tech" &&
+          {this.props.type === "tech" &&
 
             this.props.tech.products.map((product, i) => (
               <Item key={product.id} productProps={product} />
@@ -86,7 +72,7 @@ class AllProducts extends Component {
   }
 }
 
-AllProducts.defaultProps = {
+PLP.defaultProps = {
   allProducts: {
     products: [{
       id: 1,
@@ -172,4 +158,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AllProducts));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(PLP));

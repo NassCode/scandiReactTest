@@ -1,9 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { Component } from 'react';
-import AllProducts from './components/PLP/allProducts';
+import PLP from './components/PLP';
 import CartPage from './components/CartPage';
 import CartOverlay from './components/CartOverlay';
+import Navbar from './components/navbar';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,14 +18,25 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Switch>
-          <Route exact path='/'>
-            <AllProducts />
-          </Route>
-          <Route path='/cart'>
-            <CartPage />
-          </Route>
-        </Switch>
+        <div>
+          <Navbar />
+          <div>
+            <Switch>
+              <Route exact path='/'>
+                <PLP type='all' />
+              </Route>
+              <Route path='/clothes'>
+                <PLP type='clothes' />
+              </Route>
+              <Route path='/tech'>
+                <PLP type='tech' />
+              </Route>
+              <Route path='/cart'>
+                <CartPage />
+              </Route>
+            </Switch>
+          </div>
+        </div>
       </Router>
     );
   }

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import CartOverlay from "./CartOverlay";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -16,12 +16,18 @@ class Navbar extends Component {
     return (
       <div className="navbar container">
         <div className="categoriesContainer">
-
+          {/* 
           <span onClick={() => this.props.handleTabClick('all')}>All</span>
 
           <span onClick={() => this.props.handleTabClick('clothes')}>Clothes</span>
 
-          <span onClick={() => this.props.handleTabClick('tech')}>Tech</span>
+          <span onClick={() => this.props.handleTabClick('tech')}>Tech</span> */}
+
+          <Link to='/'>All</Link>
+
+          <Link to='/clothes' >Clothes</Link>
+
+          <Link to='/tech'>Tech</Link>
 
         </div>
 
