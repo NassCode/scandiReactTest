@@ -6,24 +6,30 @@ query {
     name
     products {
       id
+    name
+    inStock
+    gallery
+    description
+    category
+    attributes{
+      id
       name
-      prices {
-        amount
-        currency {
-          label
-          symbol
-        }
-        
+      type
+      items {
+        displayValue
+        value
+        id
       }
-      inStock
-      gallery
-      attributes {
-        name
-        items {
-          displayValue
-          value
-        }
+    }
+    prices{
+      currency{
+        label
+        symbol
       }
+      amount
+    }
+  
+    brand
     }
   }
 }
